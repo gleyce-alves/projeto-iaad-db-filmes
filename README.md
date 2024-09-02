@@ -5,6 +5,7 @@
 - Matheus Costa
 - Anna Carolina Bejan
 - Gleyce Alves
+- Edney Santos
 
 ## Descrição do Projeto
 
