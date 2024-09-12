@@ -38,7 +38,7 @@ Este projeto tem como objetivo desenvolver um sistema computacional web utilizan
 - **Bibliotecas Python**:
   - streamlit
   - mysql-connector-python
-  - pymongo (caso MongoDB seja utilizado para a parte NoSQL)
+  - redis
   
 Instale as dependências com o seguinte comando:
 
