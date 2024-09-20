@@ -1,6 +1,8 @@
 import streamlit as st
+from datetime import datetime
 
 cursor = st.session_state.get("cursor")
+database = st.session_state.get("database")
 
 st.title("Read")
 st.write("Utilize as tabs de navegação para visualizar os itens nas tabelas de filme, canal e exibição.")
