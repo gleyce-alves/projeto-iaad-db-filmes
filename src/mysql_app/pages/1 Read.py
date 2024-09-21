@@ -9,7 +9,6 @@ st.write("Utilize as tabs de navegação para visualizar os itens nas tabelas de
 
 tab1, tab2, tab3 = st.tabs(["Filme", "Canal", "Exibição"])
 
-# Tabela Filme
 with tab1:
     st.header("Visualizar Filmes")
 
@@ -24,7 +23,6 @@ with tab1:
     else:
         st.warning("Nenhum filme encontrado.", icon="⚠️")
 
-# Tabela Canal
 with tab2:
     st.header("Visualizar Canais")
 
@@ -39,7 +37,6 @@ with tab2:
     else:
         st.warning("Nenhum canal encontrado.", icon="⚠️")
 
-# Tabela Exibição
 with tab3:
     st.header("Visualizar Exibições")
 
