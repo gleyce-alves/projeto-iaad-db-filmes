@@ -21,16 +21,19 @@ with tab1:
     with st.expander("Ver SQL utilizado"):
         st.write(sql)
 
-    if submitted:
-        if num_filme is None or num_filme == 0:
-            st.warning('Insira um número de filme válido.', icon="⚠️")
-        else:
-            st.spinner("Deletando dados...")
-
+if submitted:
+    if num_filme is None or num_filme == 0:
+        st.warning('Insira um número de filme válido.', icon="⚠️")
+    else:
+        with st.spinner("Deletando dados..."):
             cursor.execute(sql, (num_filme,))
             database.commit()
+            
+            if cursor.rowcount == 0:
+                st.error(f'Filme com número {num_filme} não encontrado no banco de dados.', icon="❌")
+            else:
+                st.success(f'Filme com número {num_filme} deletado com sucesso!', icon="✅")
 
-            st.success(f'Filme com número {num_filme} deletado com sucesso!', icon="✅")
 
 # Deletar Canal
 with tab2:
@@ -44,16 +47,19 @@ with tab2:
     with st.expander("Ver SQL utilizado"):
         st.write(sql)
 
-    if submitted:
-        if num_canal is None or num_canal == 0:
-            st.warning('Insira um número de canal válido.', icon="⚠️")
-        else:
-            st.spinner("Deletando dados...")
-
+if submitted:
+    if num_canal is None or num_canal == 0:
+        st.warning('Insira um número de canal válido.', icon="⚠️")
+    else:
+        with st.spinner("Deletando dados..."):
             cursor.execute(sql, (num_canal,))
             database.commit()
 
-            st.success(f'Canal com número {num_canal} deletado com sucesso!', icon="✅")
+            if cursor.rowcount == 0:
+                st.error(f'Canal com número {num_canal} não encontrado no banco de dados.', icon="❌")
+            else:
+                st.success(f'Canal com número {num_canal} deletado com sucesso!', icon="✅")
+
 
 # Deletar Exibição
 with tab3:
@@ -72,16 +78,19 @@ with tab3:
     with st.expander("Ver SQL utilizado"):
         st.write(sql)
 
-    if submitted:
-        data_hora = datetime.combine(data, hora)
-        values = (num_filme, num_canal, data_hora)
+if submitted:
+    data_hora = datetime.combine(data, hora)
+    values = (num_filme, num_canal, data_hora)
 
-        if any(item is None or item == '' or item == 0 for item in values):
-            st.warning('Preencha todos os campos.', icon="⚠️")
-        else:
-            st.spinner("Deletando dados...")
-
+    if any(item is None or item == '' or item == 0 for item in values):
+        st.warning('Preencha todos os campos.', icon="⚠️")
+    else:
+        with st.spinner("Deletando dados..."):
             cursor.execute(sql, values)
             database.commit()
 
-            st.success(f'Exibição com filme {num_filme}, canal {num_canal} e data {data_hora} deletada com sucesso!', icon="✅")
+            if cursor.rowcount == 0:
+                st.error(f'Exibição com filme {num_filme}, canal {num_canal} e data {data_hora} não encontrada no banco de dados.', icon="❌")
+            else:
+                st.success(f'Exibição com filme {num_filme}, canal {num_canal} e data {data_hora} deletada com sucesso!', icon="✅")
+
