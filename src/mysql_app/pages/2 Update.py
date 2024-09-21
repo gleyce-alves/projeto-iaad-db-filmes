@@ -1,5 +1,6 @@
 import streamlit as st
 from datetime import datetime
+import psycopg2
 
 cursor = st.session_state.get("cursor")
 database = st.session_state.get("database")
@@ -9,6 +10,20 @@ st.write("Utilize as tabs de navegação para atualizar os itens nas tabelas de 
 
 tab1, tab2, tab3 = st.tabs(["Filme", "Canal", "Exibição"])
 
+# Função para capturar erros de integridade
+def handle_integrity_error(error):
+    if "foreign key" in str(error).lower():
+        st.error("Erro de integridade referencial: O ID informado não existe na tabela relacionada.", icon="⚠️")
+    elif "not null" in str(error).lower():
+        st.error("Erro de integridade: Um ou mais campos obrigatórios não foram preenchidos.", icon="⚠️")
+    elif "unique" in str(error).lower():
+        st.error("Erro de integridade: Valor duplicado detectado para um campo único.", icon="⚠️")
+    elif "primary key" in str(error).lower():
+        st.error("Erro de integridade: O valor da chave primária já existe ou é inválido.", icon="⚠️")
+    else:
+        st.error(f"Ocorreu um erro: {str(error)}", icon="⚠️")
+
+# Aba 1 - Atualizar Filme
 with tab1:
     st.header("Atualizar Filme")
 
@@ -35,21 +50,23 @@ with tab1:
         if any(item is None or item == '' for item in values[:-1]): 
             st.warning("Preencha todos os campos.", icon="⚠️")
         else:
-            with st.spinner("Atualizando dados..."):
-                cursor.execute(sql_filme_update, values)
-                database.commit()
-                st.success("Filme atualizado com sucesso!", icon="✅")
+            try:
+                with st.spinner("Atualizando dados..."):
+                    cursor.execute(sql_filme_update, values)
+                    database.commit()
+                    st.success("Filme atualizado com sucesso!", icon="✅")
+            except psycopg2.IntegrityError as e:
+                database.rollback()  # Desfaz a transação
+                handle_integrity_error(e)
 
+# Aba 2 - Atualizar Canal
 with tab2:
     st.header("Atualizar Canal")
 
-
     canal_id = st.number_input("Digite o ID do canal para atualizar", step=1)
-
 
     nome_canal = st.text_input("Nome do canal")
     sigla_canal = st.text_input("Sigla do canal")
-
 
     sql_canal_update = """
     UPDATE canal 
@@ -65,11 +82,16 @@ with tab2:
         if any(item is None or item == '' for item in values[:-1]):
             st.warning("Preencha todos os campos.", icon="⚠️")
         else:
-            with st.spinner("Atualizando dados..."):
-                cursor.execute(sql_canal_update, values)
-                database.commit()
-                st.success("Canal atualizado com sucesso!", icon="✅")
+            try:
+                with st.spinner("Atualizando dados..."):
+                    cursor.execute(sql_canal_update, values)
+                    database.commit()
+                    st.success("Canal atualizado com sucesso!", icon="✅")
+            except psycopg2.IntegrityError as e:
+                database.rollback()
+                handle_integrity_error(e)
 
+# Aba 3 - Atualizar Exibição
 with tab3:
     st.header("Atualizar Exibição")
 
@@ -94,8 +116,11 @@ with tab3:
         if any(item is None or item == '' for item in values[:-2]): 
             st.warning("Preencha todos os campos.", icon="⚠️")
         else:
-            with st.spinner("Atualizando dados..."):
-                cursor.execute(sql_exibicao_update, values)
-                database.commit()
-                st.success("Exibição atualizada com sucesso!", icon="✅")
-
+            try:
+                with st.spinner("Atualizando dados..."):
+                    cursor.execute(sql_exibicao_update, values)
+                    database.commit()
+                    st.success("Exibição atualizada com sucesso!", icon="✅")
+            except psycopg2.IntegrityError as e:
+                database.rollback()
+                handle_integrity_error(e)
