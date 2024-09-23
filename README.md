@@ -108,7 +108,7 @@ Isso iniciará o servidor do Streamlit e abrirá a aplicação no seu navegador 
 
 ### 4. Acessar a Aplicação
 
-Após rodar o comando acima, a aplicação estará disponível em seu navegador no endereço:
+Após rodar o comando acima, a aplicação estará disponível em seu navegador no endereço (a porta padrão do Streamlit é `8501`, caso seja configurado uma outra porta, altere o endereço abaixo).
 
 - **http://localhost:8501**
 
