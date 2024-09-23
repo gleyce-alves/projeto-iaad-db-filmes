@@ -68,6 +68,8 @@ Antes de rodar a aplicação, certifique-se de que você tem os seguintes requis
 
 ### 2. Configurar o Banco de Dados
 
+![Diagrama de Entidade e Relacionamento](docs/der.png)
+
 Você deve configurar o banco de dados MySQL com o esquema e tabelas necessárias antes de rodar a aplicação. Para isso:
 
 1. Abra o **MySQL Workbench** ou qualquer outro cliente MySQL de sua preferência.
