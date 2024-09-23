@@ -1,4 +1,4 @@
-# Sistema de Programação de Filmes - MySQL & NoSQL
+# Sistema de Programação de Filmes - MySQL & NoSQL 
 
 ### Integrantes:
 - Anna Carolina Bejan
@@ -16,21 +16,21 @@ Este projeto tem como objetivo desenvolver um sistema computacional web utilizan
 
 - **/src**: Contém os códigos-fonte do projeto.
   - **/mysql_app**: Contém os arquivos relacionados à implementação da aplicação MySQL com Streamlit.
-    - `app.py`: Arquivo principal da aplicação.
-    - `db.py`: Script de conexão e operações com o banco de dados MySQL.
-    - `crud_operations.py`: Funções para realizar as operações CRUD no banco de dados MySQL.
-    - `trigger.sql`: Script de criação do trigger no MySQL.
-    - **/templates**: Contém os arquivos HTML e outros templates utilizados na interface.
-  - **/nosql_app**: Contém os arquivos relacionados à implementação da aplicação NoSQL.
-    - `nosql_example.py`: Arquivo contendo exemplos das operações CRUD no banco de dados NoSQL.
-    - `nosql_comparison.py`: Script para comparação entre MySQL e o banco de dados NoSQL escolhido.
-  
-- **/data**: Contém o script SQL para criação das tabelas e inserção de dados iniciais.
-  - `database_setup.sql`: Script para criar as tabelas e inserir dados no banco MySQL.
-  
+    - **App.py**: Arquivo principal da aplicação.
+    - **db.py**: Script de conexão e operações com o banco de dados MySQL.
+    - **/pages**: Contém as páginas que implementam as operações CRUD e trigger:
+      - **0 Create.py**: Implementa a funcionalidade de criação (Create) no sistema.
+      - **1 Read.py**: Implementa a funcionalidade de leitura (Read) no sistema.
+      - **2 Update.py**: Implementa a funcionalidade de atualização (Update) no sistema.
+      - **3 Delete.py**: Implementa a funcionalidade de exclusão (Delete) no sistema.
+      - **4 Trigger.py**: Implementa o trigger customizado no sistema.
+  - **/nosql_app**: Diretório reservado para a futura implementação da aplicação NoSQL.
+
+- **/data**: Contém scripts SQL para a configuração do banco de dados.
+  - **database_setup.sql**: Script para criar as tabelas e inserir dados no banco MySQL.
+
 - **/docs**: Contém a documentação do projeto.
-  - `relatorio.pdf`: Documento com explicações detalhadas sobre o desenvolvimento do sistema, ambiente de desenvolvimento e a explicação do trigger.
-  - `der.png`: Diagrama Entidade-Relacionamento do banco de dados.
+  - **der.png**: Diagrama Entidade-Relacionamento do banco de dados.
 
 ## Pré-requisitos
 
@@ -40,7 +40,7 @@ Este projeto tem como objetivo desenvolver um sistema computacional web utilizan
   - streamlit
   - mysql-connector-python
   - redis
-  
+
 Instale as dependências com o seguinte comando:
 
 ```bash
