@@ -1,11 +1,12 @@
 # Sistema de Programação de Filmes - MySQL & NoSQL
 
 ### Integrantes:
-- Ygor Macêdo
-- Matheus Costa
 - Anna Carolina Bejan
-- Gleyce Alves
 - Edney Santos
+- Gleyce Alves
+- Matheus Costa
+- Mylena Araújo
+- Ygor Macêdo
 
 ## Descrição do Projeto
 
