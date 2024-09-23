@@ -24,13 +24,15 @@ Este projeto tem como objetivo desenvolver um sistema computacional web utilizan
       - **2 Update.py**: Implementa a funcionalidade de atualização (Update) no sistema.
       - **3 Delete.py**: Implementa a funcionalidade de exclusão (Delete) no sistema.
       - **4 Trigger.py**: Implementa o trigger customizado no sistema.
-  - **/nosql_app**: Diretório reservado para a futura implementação da aplicação NoSQL.
 
 - **/data**: Contém scripts SQL para a configuração do banco de dados.
   - **database_setup.sql**: Script para criar as tabelas e inserir dados no banco MySQL.
 
-- **/docs**: Contém a documentação do projeto.
+**/docs**: Contém a documentação do projeto.
   - **der.png**: Diagrama Entidade-Relacionamento do banco de dados.
+  - **Tutorial - MySQL.pdf**: Instruções detalhadas sobre como configurar e rodar a aplicação com MySQL.
+  - **Tutorial - Redis NoSQL.pdf**: Instruções detalhadas sobre como configurar e rodar a aplicação com Redis NoSQL.
+
 
 ## 🛠️ Pré-requisitos
 
