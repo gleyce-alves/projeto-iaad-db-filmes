@@ -43,23 +43,26 @@ with tab1:
 
     submitted_filme = st.button("Atualizar filme")
 
-    if submitted_filme:
-        values = (titulo_original, titulo_brasil, ano_lancamento, pais_origem, categoria, duracao, filme_id)
+if submitted_filme:
+    values = (titulo_original, titulo_brasil, ano_lancamento, pais_origem, categoria, duracao, filme_id)
+    
+    if any(item is None or item == '' for item in values[:-1]): 
+        st.warning("Preencha todos os campos.", icon="⚠️")
+    else:
+        try:
+            with st.spinner("Atualizando dados..."):
+                cursor.execute(sql_filme_update, values)
+                if cursor.rowcount == 0:
+                    st.warning("Nenhum filme encontrado com o ID informado.", icon="⚠️")
+                else:
+                    database.commit()
+                    st.success("Filme atualizado com sucesso!", icon="✅")
+        except psycopg2.IntegrityError as e:
+            database.rollback()
+            handle_integrity_error(e)
+        except Exception as e:
+            st.error(f"Ocorreu um erro inesperado: {str(e)}", icon="⚠️")
 
-        if any(item is None or item == '' for item in values[:-1]): 
-            st.warning("Preencha todos os campos.", icon="⚠️")
-        else:
-            try:
-                with st.spinner("Atualizando dados..."):
-                    cursor.execute(sql_filme_update, values)
-                    if cursor.rowcount == 0:
-                        st.warning("Nenhum filme encontrado com o ID informado.", icon="⚠️")
-                    else:
-                        database.commit()
-                        st.success("Filme atualizado com sucesso!", icon="✅")
-            except psycopg2.IntegrityError as e:
-                database.rollback()
-                handle_integrity_error(e)
 
 # Aba 2 - Atualizar Canal
 with tab2:
