@@ -10,7 +10,6 @@ st.write("Utilize as tabs de navegação para atualizar os itens nas tabelas de 
 
 tab1, tab2, tab3 = st.tabs(["Filme", "Canal", "Exibição"])
 
-# Função para capturar erros de integridade
 def handle_integrity_error(error):
     if "foreign key" in str(error).lower():
         st.error("Erro de integridade referencial: O ID informado não existe na tabela relacionada.", icon="⚠️")
@@ -53,10 +52,13 @@ with tab1:
             try:
                 with st.spinner("Atualizando dados..."):
                     cursor.execute(sql_filme_update, values)
-                    database.commit()
-                    st.success("Filme atualizado com sucesso!", icon="✅")
+                    if cursor.rowcount == 0:
+                        st.warning("Nenhum filme encontrado com o ID informado.", icon="⚠️")
+                    else:
+                        database.commit()
+                        st.success("Filme atualizado com sucesso!", icon="✅")
             except psycopg2.IntegrityError as e:
-                database.rollback()  # Desfaz a transação
+                database.rollback()
                 handle_integrity_error(e)
 
 # Aba 2 - Atualizar Canal
@@ -85,8 +87,11 @@ with tab2:
             try:
                 with st.spinner("Atualizando dados..."):
                     cursor.execute(sql_canal_update, values)
-                    database.commit()
-                    st.success("Canal atualizado com sucesso!", icon="✅")
+                    if cursor.rowcount == 0:
+                        st.warning("Nenhum canal encontrado com o ID informado.", icon="⚠️")
+                    else:
+                        database.commit()
+                        st.success("Canal atualizado com sucesso!", icon="✅")
             except psycopg2.IntegrityError as e:
                 database.rollback()
                 handle_integrity_error(e)
@@ -119,8 +124,11 @@ with tab3:
             try:
                 with st.spinner("Atualizando dados..."):
                     cursor.execute(sql_exibicao_update, values)
-                    database.commit()
-                    st.success("Exibição atualizada com sucesso!", icon="✅")
+                    if cursor.rowcount == 0:
+                        st.warning("Nenhuma exibição encontrada com os IDs informados.", icon="⚠️")
+                    else:
+                        database.commit()
+                        st.success("Exibição atualizada com sucesso!", icon="✅")
             except psycopg2.IntegrityError as e:
                 database.rollback()
                 handle_integrity_error(e)
