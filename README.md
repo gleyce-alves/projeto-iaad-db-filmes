@@ -45,3 +45,21 @@ Instale as dependências com o seguinte comando:
 
 ```bash
 pip install -r requirements.txt
+```
+
+## Como Rodar a aplicação
+
+1. Certifique-se de que você está na raiz do projeto.
+2. Navegue até o diretório onde está o arquivo **App.py** da aplicação MySQL:
+
+```bash
+   cd src/mysql_app
+```
+
+Execute o aplicativo usando o Streamlit:
+
+```bash
+  streamlit run App.py
+```
+
+O aplicativo será aberto no navegador padrão, e você poderá acessar a interface do sistema de programação de filmes.
